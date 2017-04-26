@@ -11,6 +11,8 @@ set (CMAKE_CXX_STANDARD 14)
 set(SOURCES
     src/libCDF++.cpp
     include/libCDF++.h
+    src/Cdf_Private.cpp
+    src/Cdf_Private.h
     )
 
 add_library(libCDF++ ${SOURCES})

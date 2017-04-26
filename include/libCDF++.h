@@ -25,6 +25,7 @@
 #include <string>
 #include <memory>
 #include <fstream>
+#include "spimpl.h"
 
 class Cdf_Private;
 
@@ -34,7 +35,8 @@ class Cdf
 
 public:
     Cdf();
-
+private:
+    spimpl::impl_ptr<Cdf_Private> impl_;
 };
 
 #endif

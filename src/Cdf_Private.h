@@ -19,14 +19,23 @@
 /*--                 Author : Alexis Jeandet
 --                     Mail : alexis.jeandet@member.fsf.org
 ----------------------------------------------------------------------------*/
+#ifndef CDF_PRIVATE_H
+#define CDF_PRIVATE_H
+
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <string>
+#include <memory>
+#include <fstream>
 #include <libCDF++.h>
-#include "Cdf_Private.h"
 
-
-Cdf::Cdf()
-    :impl_(spimpl::make_impl<Cdf_Private>())
+class Cdf_Private
 {
+public:
+    Cdf_Private();
 
-}
+private:
+};
 
-
+#endif

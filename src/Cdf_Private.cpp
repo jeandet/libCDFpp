@@ -19,14 +19,11 @@
 /*--                 Author : Alexis Jeandet
 --                     Mail : alexis.jeandet@member.fsf.org
 ----------------------------------------------------------------------------*/
-#include <libCDF++.h>
 #include "Cdf_Private.h"
+#include <iostream>
+#include <fstream>
+#include <libCDF++.h>
 
-
-Cdf::Cdf()
-    :impl_(spimpl::make_impl<Cdf_Private>())
-{
-
-}
+Cdf_Private::Cdf_Private() {}
 
 

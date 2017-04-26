@@ -36,5 +36,6 @@ if (test)
   # Unit Tests
   ##############
 
+  add_subdirectory(tests/CDF_Desc_Record)
 
 endif()

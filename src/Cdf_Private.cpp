@@ -26,4 +26,21 @@
 
 Cdf_Private::Cdf_Private() {}
 
+Cdf_Private::Cdf_Private(const std::string &fname, std::fstream::openmode mode)
+    :fname(fname)
+{
+    this->open(fname,mode);
+}
 
+bool Cdf_Private::open(const std::string &fname, std::fstream::openmode mode)
+{
+    this->opened=false;
+    std::fstream cdfFile;
+    cdfFile.open(fname, std::fstream::binary | mode);
+    if(cdfFile.is_open())
+    {
+        this->opened=true;
+        this->fname=fname;
+    }
+    return this->opened;
+}

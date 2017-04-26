@@ -29,4 +29,15 @@ Cdf::Cdf()
 
 }
 
+Cdf::Cdf(const std::string &fname, std::fstream::openmode mode)
+    :impl_(spimpl::make_impl<Cdf_Private>(fname,mode))
+{
+
+}
+
+bool Cdf::isOpened()
+{
+    return impl_->opened;
+}
+
 

@@ -34,6 +34,10 @@ class Cdf_Private
 {
 public:
     Cdf_Private();
+    Cdf_Private(const std::string& fname, std::fstream::openmode mode = std::fstream::in);
+    bool open(const std::string& fname, std::fstream::openmode mode = std::fstream::in);
+    bool opened=false;
+    std::string fname;
 
 private:
 };

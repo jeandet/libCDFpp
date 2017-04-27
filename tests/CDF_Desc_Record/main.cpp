@@ -35,6 +35,23 @@ TEST_F(CdfTest, OpenWrongFile) {
   EXPECT_EQ(false, f.isOpened());
 }
 
+TEST_F(CdfTest, OpenExistingFile) {
+  const std::string file = TEST_DATA_DIR"/cacsst2.cdf";
+  Cdf f(file);
+  EXPECT_EQ(true, f.isOpened());
+}
+
+TEST_F(CdfTest, WrongMagic) {
+  const std::string file = TEST_DATA_DIR"/random.cdf";
+  Cdf f(file);
+  EXPECT_EQ(false, f.isOpened());
+}
+
+TEST_F(CdfTest, GoodMagic) {
+  const std::string file = TEST_DATA_DIR"/cacsst2.cdf";
+  Cdf f(file);
+  EXPECT_EQ(true, f.isOpened());
+}
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

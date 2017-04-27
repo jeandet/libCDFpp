@@ -40,6 +40,7 @@ public:
     std::string fname;
 
 private:
+    bool p_checkMagic(const char* data);
 };
 
 #endif

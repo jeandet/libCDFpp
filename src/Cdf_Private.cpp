@@ -22,6 +22,7 @@
 #include "Cdf_Private.h"
 #include <iostream>
 #include <fstream>
+#include <limits>
 #include <libCDF++.h>
 
 Cdf_Private::Cdf_Private() {}
@@ -32,15 +33,38 @@ Cdf_Private::Cdf_Private(const std::string &fname, std::fstream::openmode mode)
     this->open(fname,mode);
 }
 
+//might be refactored later
+inline std::streamsize fileSize(std::fstream& file)
+{
+    file.ignore(std::numeric_limits<std::streamsize>::max());
+    std::streamsize length = file.gcount();
+    file.clear();
+    file.seekg( 0, std::ios_base::beg );
+    return length;
+}
+
 bool Cdf_Private::open(const std::string &fname, std::fstream::openmode mode)
 {
     this->opened=false;
-    std::fstream cdfFile;
-    cdfFile.open(fname, std::fstream::binary | mode);
+    std::fstream cdfFile(fname, std::fstream::binary | mode);
     if(cdfFile.is_open())
     {
         this->opened=true;
         this->fname=fname;
+        std::streamsize length = fileSize(cdfFile);
+        char* data=new char[static_cast<unsigned long>(length)];
+        cdfFile.read(data,length);
+        this->opened=p_checkMagic(data);
+        if(this->opened)
+        {
+
+        }
+        delete[] data;
     }
     return this->opened;
+}
+
+bool Cdf_Private::p_checkMagic(const char *data)
+{
+    return ((data[0]&0xFF)==0xcd) && ((data[1]&0xF0)==0xf0);
 }

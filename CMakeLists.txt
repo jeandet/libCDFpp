@@ -35,7 +35,7 @@ if (test)
   ##############
   # Unit Tests
   ##############
-
+  add_definitions(-DTEST_DATA_DIR="${CMAKE_CURRENT_LIST_DIR}/tests/DATA")
   add_subdirectory(tests/CDF_Desc_Record)
 
 endif()

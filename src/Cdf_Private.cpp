@@ -49,22 +49,30 @@ bool Cdf_Private::open(const std::string &fname, std::fstream::openmode mode)
     std::fstream cdfFile(fname, std::fstream::binary | mode);
     if(cdfFile.is_open())
     {
-        this->opened=true;
         this->fname=fname;
         std::streamsize length = fileSize(cdfFile);
-        char* data=new char[static_cast<unsigned long>(length)];
-        cdfFile.read(data,length);
-        this->opened=p_checkMagic(data);
-        if(this->opened)
+        if(length>=static_cast<long>(MIN_CDF_SIZE))
         {
+            this->opened=true;
+            char* data=new char[static_cast<unsigned long>(length)];
+            cdfFile.read(data,length);
+            toMachineEndianness(data);
+            CDF_t* cdfFile=(CDF_t*)data;
+            this->opened=p_checkMagic(cdfFile);
+            if(this->opened)
+            {
 
+            }
+            delete[] data;
         }
-        delete[] data;
     }
     return this->opened;
 }
 
-bool Cdf_Private::p_checkMagic(const char *data)
+bool Cdf_Private::p_checkMagic(const CDF_t *file)
 {
-    return ((data[0]&0xFF)==0xcd) && ((data[1]&0xF0)==0xf0);
+    return ( file->magicNumbers.Magic1==0xCDF30001
+             &&
+             (file->magicNumbers.Magic2 == 0x0000FFFF ||file->magicNumbers.Magic2 == 0xCCCC0001));
+
 }

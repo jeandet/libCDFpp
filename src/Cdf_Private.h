@@ -29,6 +29,7 @@
 #include <memory>
 #include <fstream>
 #include <libCDF++.h>
+#include "Cdf_Structs.h"
 
 class Cdf_Private
 {
@@ -40,7 +41,7 @@ public:
     std::string fname;
 
 private:
-    bool p_checkMagic(const char* data);
+    bool p_checkMagic(const CDF_t* file);
 };
 
 #endif

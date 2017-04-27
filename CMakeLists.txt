@@ -13,6 +13,7 @@ set(SOURCES
     include/libCDF++.h
     src/Cdf_Private.cpp
     src/Cdf_Private.h
+    src/Cdf_Structs.h
     )
 
 add_library(libCDF++ ${SOURCES})

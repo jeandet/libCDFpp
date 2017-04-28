@@ -71,8 +71,10 @@ bool Cdf_Private::open(const std::string &fname, std::fstream::openmode mode)
 
 bool Cdf_Private::p_checkMagic(const CDF_t *file)
 {
-    return ( file->magicNumbers.Magic1==0xCDF30001
+    return ( (file->magicNumbers.Magic1&0xCDF00000)==0xCDF00000
              &&
-             (file->magicNumbers.Magic2 == 0x0000FFFF ||file->magicNumbers.Magic2 == 0xCCCC0001));
+             (file->magicNumbers.Magic2 == 0x0000FFFF //Uncompressed
+              ||
+              file->magicNumbers.Magic2 == 0xCCCC0001)); //Compressed
 
 }

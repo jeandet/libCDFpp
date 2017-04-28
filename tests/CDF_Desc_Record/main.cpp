@@ -1,59 +1,54 @@
 #include "gtest/gtest.h"
 #include "libCDF++.h"
+#include <vector>
 
-namespace {
-
-class CdfTest : public ::testing::Test {
- protected:
-  CdfTest() {
-    // You can do set-up work for each test here.
-  }
-
-  virtual ~CdfTest() {
-    // You can do clean-up work that doesn't throw exceptions here.
-  }
-
-  // If the constructor and destructor are not enough for setting up
-  // and cleaning up each test, you can define the following methods:
-
-  virtual void SetUp() {
-    // Code here will be called immediately after the constructor (right
-    // before each test).
-  }
-
-  virtual void TearDown() {
-    // Code here will be called immediately after each test (right
-    // before the destructor).
-  }
- };
-
+struct testInput
+{
+    std::string file;
+    bool expectGoodMagic;
 };
 
-TEST_F(CdfTest, OpenWrongFile) {
-  const std::string file = "wrongCDF.cdf";
-  Cdf f(file);
-  EXPECT_EQ(false, f.isOpened());
+
+namespace {
+class CdfTestCDR : public ::testing::TestWithParam<testInput> {
+protected:
+    CdfTestCDR() {
+        // You can do set-up work for each test here.
+    }
+
+    virtual ~CdfTestCDR() {
+        // You can do clean-up work that doesn't throw exceptions here.
+    }
+
+    // If the constructor and destructor are not enough for setting up
+    // and cleaning up each test, you can define the following methods:
+
+    virtual void SetUp() {
+        // Code here will be called immediately after the constructor (right
+        // before each test).
+    }
+
+    virtual void TearDown() {
+        // Code here will be called immediately after each test (right
+        // before the destructor).
+    }
+};
+};
+
+TEST_P(CdfTestCDR, Magic) {
+    auto input = GetParam();
+    Cdf f(input.file);
+    EXPECT_EQ(input.expectGoodMagic, f.isOpened());
 }
 
-TEST_F(CdfTest, OpenExistingFile) {
-  const std::string file = TEST_DATA_DIR"/cacsst2.cdf";
-  Cdf f(file);
-  EXPECT_EQ(true, f.isOpened());
-}
+const testInput testInputs[] = {
+    {TEST_DATA_DIR"/random.cdf",false},
+    {TEST_DATA_DIR"/cacsst2.cdf",true}
+};
 
-TEST_F(CdfTest, WrongMagic) {
-  const std::string file = TEST_DATA_DIR"/random.cdf";
-  Cdf f(file);
-  EXPECT_EQ(false, f.isOpened());
-}
-
-TEST_F(CdfTest, GoodMagic) {
-  const std::string file = TEST_DATA_DIR"/cacsst2.cdf";
-  Cdf f(file);
-  EXPECT_EQ(true, f.isOpened());
-}
+INSTANTIATE_TEST_CASE_P(CDR_Magic,CdfTestCDR,::testing::ValuesIn(testInputs));
 
 int main(int argc, char **argv) {
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }

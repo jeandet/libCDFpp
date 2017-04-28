@@ -41,7 +41,7 @@ TEST_P(CdfTestCDR, Magic) {
     EXPECT_EQ(input.expectGoodMagic, f.isOpened());
 }
 
-const testInput testInputs[] = {
+const std::vector<testInput> testInputs = {
     {TEST_DATA_DIR"/random.cdf",false},
     {TEST_DATA_DIR"/cacsst2.cdf",true}
 };

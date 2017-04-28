@@ -49,7 +49,7 @@ bool Cdf_Private::open(const std::string &fname, std::fstream::openmode mode)
     std::fstream cdfFile(fname, std::fstream::binary | mode);
     if(cdfFile.is_open())
     {
-        this->fname=fname;
+        this->fname = fname;
         std::streamsize length = fileSize(cdfFile);
         if(length>=static_cast<long>(MIN_CDF_SIZE))
         {

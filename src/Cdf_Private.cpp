@@ -57,7 +57,7 @@ bool Cdf_Private::open(const std::string &fname, std::fstream::openmode mode)
             char* data=new char[static_cast<unsigned long>(length)];
             cdfFile.read(data,length);
             toMachineEndianness(data);
-            CDF_t* cdfFile=(CDF_t*)data;
+            CDF_t* cdfFile=reinterpret_cast<CDF_t*>(data);
             this->opened=p_checkMagic(cdfFile);
             if(this->opened)
             {

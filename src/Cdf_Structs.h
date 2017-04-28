@@ -58,10 +58,8 @@ typedef struct __attribute__((__packed__)) CDF_t
 #define MIN_CDF_SIZE (sizeof(CDFMagic_t) + sizeof(CDFDescriptorRecord_t))
 
 template<int T>
-inline void fixEndianness(char* data)
-{
+inline void fixEndianness(char* data)=delete;
 
-}
 template <>
 inline void fixEndianness<2>(char* data)
 {

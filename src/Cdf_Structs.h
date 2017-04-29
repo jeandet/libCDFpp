@@ -26,6 +26,18 @@
 #include <vector>
 #include <tuple>
 
+extern const std::vector<std::pair<bool,int>> CDFMagicWordsMap;
+extern const std::vector<std::pair<bool,int>> CDFDescriptorRecordWordsMap;
+extern const std::vector<std::pair<bool,int>> CDFCompressedRecordWordsMap;
+
+typedef struct CDFBlock_t
+{
+    const std::vector<std::pair<bool,int>>& wordsMap;
+    uint64_t offset;
+}CDFBlock_t;
+
+using CDFMap = std::vector<CDFBlock_t>;
+
 typedef struct __attribute__((__packed__)) CDFMagic_t
 {
     uint32_t Magic1;
@@ -34,6 +46,7 @@ typedef struct __attribute__((__packed__)) CDFMagic_t
 
 typedef struct __attribute__((__packed__)) CDFDescriptorRecord_t
 {
+
     int64_t size;
     int32_t type;
     int64_t GDRoffset;
@@ -48,6 +61,25 @@ typedef struct __attribute__((__packed__)) CDFDescriptorRecord_t
     int32_t rfuE;
     char copyright[256];//Only compatible with 2.5+ CDF version
 }CDFDescriptorRecord_t;
+
+typedef struct __attribute__((__packed__)) CDFCompressedRecord_t
+{
+    int64_t size;
+    int32_t type;
+    int64_t CPRoffset;
+    int64_t uSize;
+    int32_t rfuA;
+}CDFCompressedRecord_t;
+
+typedef struct __attribute__((__packed__)) CDFCompressedParametersRecord_t
+{
+    int64_t size;
+    int32_t type;
+    int32_t cType;
+    int32_t rfuA;
+    int32_t pCount;
+    int32_t cParms;
+}CDFCompressedParametersRecord_t;
 
 typedef struct __attribute__((__packed__)) CDF_t
 {
@@ -125,4 +157,14 @@ inline void toMachineEndianness(char* file)
     }
 #endif
 }
+
+template<typename CDF_Block>
+decltype(auto) makeBlock(CDF_Block&& blk, int offset, char* data)=delete;
+template<>
+inline decltype(auto) makeBlock(CDFMagic_t&& blk, int offset, char* data)
+{
+
+}
+
+
 #endif

@@ -51,14 +51,13 @@ bool Cdf_Private::open(const std::string &fname, std::fstream::openmode mode)
     {
         this->fname = fname;
         std::streamsize length = fileSize(cdfFile);
-        if(length>=static_cast<long>(MIN_CDF_SIZE))
+        if(length>=static_cast<long>(8))
         {
             this->opened=true;
             char* data=new char[static_cast<unsigned long>(length)];
             cdfFile.read(data,length);
-            toMachineEndianness(data);
-            CDF_t* cdfFile=reinterpret_cast<CDF_t*>(data);
-            this->opened=p_checkMagic(cdfFile);
+            CDFMagic_t* magic=mapCDFBlock<CDFMagic_t>(data);
+            this->opened=p_checkMagic(magic);
             if(this->opened)
             {
 
@@ -69,12 +68,12 @@ bool Cdf_Private::open(const std::string &fname, std::fstream::openmode mode)
     return this->opened;
 }
 
-bool Cdf_Private::p_checkMagic(const CDF_t *file)
+bool Cdf_Private::p_checkMagic(const CDFMagic_t *magic)
 {
-    return ( (file->magicNumbers.Magic1&0xCDF00000)==0xCDF00000
+    return ( (magic->Magic1&0xCDF00000)==0xCDF00000
              &&
-             (file->magicNumbers.Magic2 == 0x0000FFFF //Uncompressed
+             (magic->Magic2 == 0x0000FFFF //Uncompressed
               ||
-              file->magicNumbers.Magic2 == 0xCCCC0001)); //Compressed
+              magic->Magic2 == 0xCCCC0001)); //Compressed
 
 }

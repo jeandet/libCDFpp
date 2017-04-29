@@ -8,18 +8,27 @@ endif(NOT CMAKE_BUILD_TYPE)
 
 set (CMAKE_CXX_STANDARD 14)
 
+add_custom_command(
+    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/tools/code_gen.py ${CMAKE_CURRENT_LIST_DIR}/src/Cdf_Structs.h.in ${CMAKE_CURRENT_BINARY_DIR}/Cdf_Structs.h
+    DEPENDS ${CMAKE_CURRENT_LIST_DIR}/tools/code_gen.py ${CMAKE_CURRENT_LIST_DIR}/src/Cdf_Structs.h.in
+    OUTPUT  ${CMAKE_CURRENT_BINARY_DIR}/Cdf_Structs.h
+    COMMENT "Generating code for CDF mapping structures."
+)
+
 set(SOURCES
     src/libCDF++.cpp
     include/libCDF++.h
     src/Cdf_Private.cpp
     src/Cdf_Private.h
-    src/Cdf_Structs.h
-    src/Cdf_Structs.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/Cdf_Structs.h
     )
 
 add_library(libCDF++ ${SOURCES})
 
-include_directories("include")
+include_directories(
+    "include"
+    ${CMAKE_CURRENT_BINARY_DIR}
+    )
 
 option(test "Build all tests." ON) # Makes boolean 'test' available.
 

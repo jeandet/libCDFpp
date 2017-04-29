@@ -1,0 +1,192 @@
+{
+ "CDFDescriptorRecord_t": [
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "size", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "type", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "GDRoffset", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "version", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "release", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "encoding", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "flags", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfuA", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfuB", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "increment", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfuD", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfuE", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": "char", 
+   "array_size": 256, 
+   "name": "copyright", 
+   "endianness": null, 
+   "word_size": null
+  }
+ ], 
+ "CDFCompressedParametersRecord_t": [
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "size", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "type", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "cType", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfuA", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "pCount", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "cParms", 
+   "endianness": "Big", 
+   "word_size": 4
+  }
+ ], 
+ "CDFMagic_t": [
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "Magic1", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "Magic2", 
+   "endianness": "Big", 
+   "word_size": 4
+  }
+ ], 
+ "CDFCompressedRecord_t": [
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "size", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "type", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "CPRoffset", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "uSize", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfuA", 
+   "endianness": "Big", 
+   "word_size": 4
+  }
+ ]
+}

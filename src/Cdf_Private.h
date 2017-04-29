@@ -31,6 +31,7 @@
 #include <libCDF++.h>
 #include <Cdf_Structs.h>
 
+
 class Cdf_Private
 {
 public:
@@ -41,7 +42,7 @@ public:
     std::string fname;
 
 private:
-    bool p_checkMagic(const CDFMagic_t* magic);
+    bool p_checkMagic(const CDFMagic_t &magic);
 };
 
 #endif

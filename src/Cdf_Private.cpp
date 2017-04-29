@@ -43,6 +43,7 @@ inline std::streamsize fileSize(std::fstream& file)
     return length;
 }
 
+
 bool Cdf_Private::open(const std::string &fname, std::fstream::openmode mode)
 {
     this->opened=false;
@@ -54,21 +55,20 @@ bool Cdf_Private::open(const std::string &fname, std::fstream::openmode mode)
         if(length>=static_cast<long>(8))
         {
             this->opened=true;
-            char* data=new char[static_cast<unsigned long>(length)];
-            cdfFile.read(data,length);
-            CDFMagic_t* magic=mapCDFBlock<CDFMagic_t>(data);
+            std::shared_ptr<char[]> data(new char[static_cast<unsigned long>(length)],[](char* data){delete [] data;});
+            cdfFile.read(data.get(),length);
+            auto magic=mapCDFBlock<CDFMagic_t>(data);
             this->opened=p_checkMagic(magic);
             if(this->opened)
             {
 
             }
-            delete[] data;
         }
     }
     return this->opened;
 }
 
-bool Cdf_Private::p_checkMagic(const CDFMagic_t *magic)
+bool Cdf_Private::p_checkMagic(const CDFMagic_t& magic)
 {
     return ( (magic->Magic1&0xCDF00000)==0xCDF00000
              &&

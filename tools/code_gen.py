@@ -51,20 +51,20 @@ def declare_struct(name, struct):
     {{
     {members}
     }}{typename};
-    """.format(typename=name, members=members)
+    """.format(typename="_"+name, members=members)
 
 def swap_endianness(member):
     if not member.array_size is None:
         return"""
             for(int idx=0;idx<{size};idx++)
                 {{
-                    block->{name}[idx]={swap}block->{name}[idx])));
+                    safeStruct->{name}[idx]={swap}safeStruct->{name}[idx])));
                 }}""".format(size=member.array_size,
                              name=member.name,
                              swap=wonrds_endianness_swap_LUT[member.word_size])
     else:
         return """
-            block->{name}={swap}block->{name})));""".format(
+            safeStruct->{name}={swap}safeStruct->{name})));""".format(
                 name=member.name, swap=wonrds_endianness_swap_LUT[member.word_size])
 
 def declare_mapper(name, struct):
@@ -78,18 +78,19 @@ def declare_mapper(name, struct):
         if member.endianness == "Little":
             BE_FIX += swap_endianness(member);
     return """
-    template<>
-    inline {typename}* mapCDFBlock<{typename}>(char* data,int offset)
-    {{
-        {typename}* block=reinterpret_cast<{typename}*>(data+offset);
-        #if __BYTE_ORDER == __LITTLE_ENDIAN
-        {LE_FIX}
-        #endif
-        #if __BYTE_ORDER == __BIG_ENDIAN
-        {BE_FIX}
-        #endif
-        return block;
-    }}
+using {typename} = safeStructMapper<_{typename}>;
+template<>
+inline decltype (auto) mapCDFBlock<{typename}>(std::shared_ptr<char[]> data,int offset)
+{{
+    {typename} safeStruct(data,reinterpret_cast<_{typename}*>(data.get()+offset));
+    #if __BYTE_ORDER == __LITTLE_ENDIAN
+    {LE_FIX}
+    #endif
+    #if __BYTE_ORDER == __BIG_ENDIAN
+    {BE_FIX}
+    #endif
+    return safeStruct;
+}}
     """.format(typename=typename, LE_FIX=LE_FIX, BE_FIX=BE_FIX)
 
 def main(argv):
@@ -109,6 +110,23 @@ def main(argv):
 #include <stdint.h>
 #include <byteswap.h>
 #include <endian.h>
+#include <memory>
+
+template <typename T>
+class safeStructMapper
+{
+    T* _mappedStruct;
+    std::shared_ptr<char[]> data;
+public:
+    safeStructMapper(std::shared_ptr<char[]> data, T* structToMap)
+        :_mappedStruct(structToMap),data(data)
+    {}
+    T*
+    operator->() const noexcept
+    {
+        return _mappedStruct;
+    }
+};
 //=========================================================================
 //  Structures declarations
 //=========================================================================
@@ -117,14 +135,14 @@ def main(argv):
                 generated_cpp += declare_struct(struct, CDF_Structs[struct])
 
             generated_cpp += """
-            template<typename CDF_Block>
-            CDF_Block* mapCDFBlock(char* data,int offset=0)=delete;
+template<typename CDF_Block>
+decltype (auto) mapCDFBlock(std::shared_ptr<char[]> data,int offset=0)=delete;
 
             """
             for struct in CDF_Structs:
                 generated_cpp += declare_mapper(struct, CDF_Structs[struct])
             generated_cpp += """
-            #endif //CDF_STRUCTS_H
+#endif //CDF_STRUCTS_H
             """
             with open(outputfile, "w") as outfile:
                 outfile.write(generated_cpp)

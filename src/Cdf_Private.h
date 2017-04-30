@@ -29,8 +29,6 @@
 #include <memory>
 #include <fstream>
 #include <libCDF++.h>
-#include <Cdf_Structs.h>
-
 
 class Cdf_Private
 {
@@ -39,10 +37,11 @@ public:
     Cdf_Private(const std::string& fname, std::fstream::openmode mode = std::fstream::in);
     bool open(const std::string& fname, std::fstream::openmode mode = std::fstream::in);
     bool opened=false;
+    bool compressed=false;
     std::string fname;
 
 private:
-    bool p_checkMagic(const CDFMagic_t &magic);
+
 };
 
 #endif

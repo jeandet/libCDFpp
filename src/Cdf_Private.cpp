@@ -24,6 +24,10 @@
 #include <fstream>
 #include <limits>
 #include <libCDF++.h>
+#include <Cdf_Structs.h>
+
+bool p_checkMagic(const CDFMagic_t& magic);
+bool p_isCompressed(const CDFMagic_t& magic);
 
 Cdf_Private::Cdf_Private() {}
 
@@ -47,6 +51,7 @@ inline std::streamsize fileSize(std::fstream& file)
 bool Cdf_Private::open(const std::string &fname, std::fstream::openmode mode)
 {
     this->opened=false;
+    this->compressed=false;
     std::fstream cdfFile(fname, std::fstream::binary | mode);
     if(cdfFile.is_open())
     {
@@ -61,6 +66,7 @@ bool Cdf_Private::open(const std::string &fname, std::fstream::openmode mode)
             this->opened=p_checkMagic(magic);
             if(this->opened)
             {
+                this->compressed=p_isCompressed(magic);
 
             }
         }
@@ -68,7 +74,13 @@ bool Cdf_Private::open(const std::string &fname, std::fstream::openmode mode)
     return this->opened;
 }
 
-bool Cdf_Private::p_checkMagic(const CDFMagic_t& magic)
+
+bool p_isCompressed(const CDFMagic_t& magic)
+{
+    return  magic->Magic2 == 0xCCCC0001;
+}
+
+bool p_checkMagic(const CDFMagic_t& magic)
 {
     return ( (magic->Magic1&0xCDF00000)==0xCDF00000
              &&

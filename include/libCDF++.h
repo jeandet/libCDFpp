@@ -37,6 +37,7 @@ public:
     Cdf();
     Cdf(const std::string& fname, std::fstream::openmode mode = std::fstream::in);
     bool isOpened();
+    bool isCompressed();
 private:
     spimpl::impl_ptr<Cdf_Private> impl_;
 };

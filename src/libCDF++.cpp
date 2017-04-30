@@ -40,4 +40,9 @@ bool Cdf::isOpened()
     return impl_->opened;
 }
 
+bool Cdf::isCompressed()
+{
+    return impl_->compressed;
+}
+
 

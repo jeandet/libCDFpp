@@ -22,7 +22,7 @@ class cdf_block_struct_member(object):
 
 
 structs = {}
-wonrds_types_LUT = {1:"int8_t",2:"int16_t",4:"int32_t",8:"int64_t"}
+wonrds_types_LUT = {1:"uint8_t",2:"uint16_t",4:"uint32_t",8:"uint64_t"}
 wonrds_endianness_swap_LUT = {
     2:"static_cast<int16_t>(__bswap_16(static_cast<uint16_t>(",
     4:"static_cast<int32_t>(__bswap_32(static_cast<uint32_t>(",

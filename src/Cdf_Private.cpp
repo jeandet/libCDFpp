@@ -60,8 +60,8 @@ bool Cdf_Private::open(const std::string &fname, std::fstream::openmode mode)
         if(length>=static_cast<long>(8))
         {
             this->opened=true;
-            std::shared_ptr<char[]> data(new char[static_cast<unsigned long>(length)],[](char* data){delete [] data;});
-            cdfFile.read(data.get(),length);
+            std::shared_ptr<char> data(new char[static_cast<unsigned long>(length)], std::default_delete<char[]>());
+            cdfFile.read(&(data.get()[0]),length);
             auto magic=mapCDFBlock<CDFMagic_t>(data);
             this->opened=p_checkMagic(magic);
             if(this->opened)

@@ -80,7 +80,7 @@ def declare_mapper(name, struct):
     return """
 using {typename} = safeStructMapper<_{typename}>;
 template<>
-inline decltype (auto) mapCDFBlock<{typename}>(std::shared_ptr<char[]> data,int offset)
+inline decltype (auto) mapCDFBlock<{typename}>(std::shared_ptr<char> data,int offset)
 {{
     {typename} safeStruct(data,reinterpret_cast<_{typename}*>(data.get()+offset));
     #if __BYTE_ORDER == __LITTLE_ENDIAN
@@ -116,9 +116,9 @@ template <typename T>
 class safeStructMapper
 {
     T* _mappedStruct;
-    std::shared_ptr<char[]> data;
+    std::shared_ptr<char> data;
 public:
-    safeStructMapper(std::shared_ptr<char[]> data, T* structToMap)
+    safeStructMapper(std::shared_ptr<char> data, T* structToMap)
         :_mappedStruct(structToMap),data(data)
     {}
     T*
@@ -136,7 +136,7 @@ public:
 
             generated_cpp += """
 template<typename CDF_Block>
-decltype (auto) mapCDFBlock(std::shared_ptr<char[]> data,int offset=0)=delete;
+decltype (auto) mapCDFBlock(std::shared_ptr<char> data,int offset=0)=delete;
 
             """
             for struct in CDF_Structs:

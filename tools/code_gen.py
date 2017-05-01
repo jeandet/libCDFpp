@@ -108,8 +108,16 @@ def main(argv):
 #ifndef CDF_STRUCTS_H
 #define CDF_STRUCTS_H
 #include <stdint.h>
-#include <byteswap.h>
-#include <endian.h>
+#if defined(__APPLE__)
+ #include <libkern/OSByteOrder.h>
+ #define __bswap_16 OSSwapInt16
+ #define __bswap_32 OSSwapInt32
+ #define __bswap_64 OSSwapInt64
+ #include <machine/endian.h>
+#else
+ #include <byteswap.h>
+ #include <endian.h>
+#endif
 #include <memory>
 
 template <typename T>
@@ -136,7 +144,7 @@ public:
 
             generated_cpp += """
 template<typename CDF_Block>
-decltype (auto) mapCDFBlock(std::shared_ptr<char> data,int offset=0)=delete;
+decltype (auto) mapCDFBlock(std::shared_ptr<char> data,int offset=0){};
 
             """
             for struct in CDF_Structs:

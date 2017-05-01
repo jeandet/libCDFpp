@@ -1,5 +1,7 @@
 cmake_minimum_required (VERSION 2.6)
 project (libCDF++)
+find_package( PythonLibs  REQUIRED )
+find_package( PythonInterp  REQUIRED )
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "Release" CACHE STRING

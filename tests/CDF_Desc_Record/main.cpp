@@ -52,6 +52,10 @@ const std::vector<testInput> testInputs = {
     {TEST_DATA_DIR"/random.cdf",false,false},
     {TEST_DATA_DIR"/cacsst2.cdf",true,false},
     {TEST_DATA_DIR"/d103a2x.cdf",true,true},
+    {TEST_DATA_DIR"/example1.cdf",true,false},
+    {TEST_DATA_DIR"/example2.cdf",true,false},
+    {TEST_DATA_DIR"/ij01r39.cdf",true,false},
+    {TEST_DATA_DIR"/zfia10x.cdf",true,false}
 };
 
 INSTANTIATE_TEST_CASE_P(CDR_Magic,CdfTestCDR,::testing::ValuesIn(testInputs));

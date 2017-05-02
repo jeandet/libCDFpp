@@ -8,7 +8,11 @@ if(NOT CMAKE_BUILD_TYPE)
       "Choose the type of build, options are: Debug Release RelWithDebInfo MinSizeRel." FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
 
-set (CMAKE_CXX_STANDARD 14)
+if(TRAVIS)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+else()
+     set (CMAKE_CXX_STANDARD 14)
+endif()
 
 add_custom_command(
     COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/tools/code_gen.py ${CMAKE_CURRENT_LIST_DIR}/src/Cdf_Structs.h.in ${CMAKE_CURRENT_BINARY_DIR}/Cdf_Structs.h

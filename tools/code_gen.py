@@ -1,97 +1,9 @@
 #!/bin/env python
 import json
 import sys
+from code_gen_lib import *
+import cpp_code_gen as cpp
 
-
-def struct_member(name, word_size, endianness, array_size=None, overhide_type=None):
-    member = {}
-    member["name"] = name
-    member["word_size"] = word_size
-    member["endianness"] = endianness
-    member["array_size"] = array_size
-    member["overhide_type"] = overhide_type
-    return member
-
-class cdf_block_struct_member(object):
-    def __init__(self, data_dict):
-        self.name = data_dict["name"]
-        self.word_size = data_dict["word_size"]
-        self.endianness = data_dict["endianness"]
-        self.array_size = data_dict["array_size"]
-        self.overhide_type = data_dict["overhide_type"]
-
-
-structs = {}
-wonrds_types_LUT = {1:"uint8_t",2:"uint16_t",4:"uint32_t",8:"uint64_t"}
-wonrds_endianness_swap_LUT = {
-    2:"static_cast<int16_t>(__bswap_16(static_cast<uint16_t>(",
-    4:"static_cast<int32_t>(__bswap_32(static_cast<uint32_t>(",
-    8:"static_cast<int64_t>(__bswap_64(static_cast<uint64_t>("
-}
-
-def declare_struct_member(struct_member):
-    type_name = struct_member.overhide_type
-    name = struct_member.name
-    if type_name is None:
-        type_name = wonrds_types_LUT[struct_member.word_size]
-    if not struct_member.array_size is None:
-        name += "[{size}]".format(size=struct_member.array_size)
-    return """    {type_name} {name};
-    """.format(type_name=type_name, name=name)
-
-def declare_struct(name, struct):
-    if name in structs:
-        raise Exception("error overhiding structure {name}".format(name=name))
-    structs[name] = struct
-    members = ""
-    for member in struct:
-        members += declare_struct_member(cdf_block_struct_member(member))
-    return """
-    typedef struct __attribute__((__packed__)) {typename}
-    {{
-    {members}
-    }}{typename};
-    """.format(typename="_"+name, members=members)
-
-def swap_endianness(member):
-    if not member.array_size is None:
-        return"""
-            for(int idx=0;idx<{size};idx++)
-                {{
-                    safeStruct->{name}[idx]={swap}safeStruct->{name}[idx])));
-                }}""".format(size=member.array_size,
-                             name=member.name,
-                             swap=wonrds_endianness_swap_LUT[member.word_size])
-    else:
-        return """
-            safeStruct->{name}={swap}safeStruct->{name})));""".format(
-                name=member.name, swap=wonrds_endianness_swap_LUT[member.word_size])
-
-def declare_mapper(name, struct):
-    typename = name
-    LE_FIX = ""
-    BE_FIX = ""
-    for member in struct:
-        member = cdf_block_struct_member(member)
-        if member.endianness == "Big":
-            LE_FIX += swap_endianness(member);
-        if member.endianness == "Little":
-            BE_FIX += swap_endianness(member);
-    return """
-using {typename} = safeStructMapper<_{typename}>;
-template<>
-inline decltype (auto) mapCDFBlock<{typename}>(std::shared_ptr<char> data,int offset)
-{{
-    {typename} safeStruct(data,reinterpret_cast<_{typename}*>(data.get()+offset));
-    #if __BYTE_ORDER == __LITTLE_ENDIAN
-    {LE_FIX}
-    #endif
-    #if __BYTE_ORDER == __BIG_ENDIAN
-    {BE_FIX}
-    #endif
-    return safeStruct;
-}}
-    """.format(typename=typename, LE_FIX=LE_FIX, BE_FIX=BE_FIX)
 
 def main(argv):
     if len(argv) == 2:
@@ -99,61 +11,24 @@ def main(argv):
         outputfile = argv[1]
         with open(inputfile, "r") as file:
             CDF_Structs = json.load(file)
-            generated_cpp = """
+            generator=cpp.code_gen()
+            generated_code = """
 //#########################################################################
 /*
     This file is auto generated, do not try to edit it!
 */
 //#########################################################################
-#ifndef CDF_STRUCTS_H
-#define CDF_STRUCTS_H
-#include <stdint.h>
-#if defined(__APPLE__)
- #include <libkern/OSByteOrder.h>
- #define __bswap_16 OSSwapInt16
- #define __bswap_32 OSSwapInt32
- #define __bswap_64 OSSwapInt64
- #include <machine/endian.h>
-#else
- #include <byteswap.h>
- #include <endian.h>
-#endif
-#include <memory>
-
-template <typename T>
-class safeStructMapper
-{
-    T* _mappedStruct;
-    std::shared_ptr<char> data;
-public:
-    safeStructMapper(std::shared_ptr<char> data, T* structToMap)
-        :_mappedStruct(structToMap),data(data)
-    {}
-    T*
-    operator->() const noexcept
-    {
-        return _mappedStruct;
-    }
-};
-//=========================================================================
-//  Structures declarations
-//=========================================================================
             """
+            generated_code+=generator.header()
             for struct in CDF_Structs:
-                generated_cpp += declare_struct(struct, CDF_Structs[struct])
+                generated_code += generator.declare_struct(struct, CDF_Structs[struct])
 
-            generated_cpp += """
-template<typename CDF_Block>
-decltype (auto) mapCDFBlock(std::shared_ptr<char> data,int offset=0){};
-
-            """
+            generated_code+=generator.before_mapper()
             for struct in CDF_Structs:
-                generated_cpp += declare_mapper(struct, CDF_Structs[struct])
-            generated_cpp += """
-#endif //CDF_STRUCTS_H
-            """
+                generated_code += generator.declare_mapper(struct, CDF_Structs[struct])
+            generated_code +=generator.footer()
             with open(outputfile, "w") as outfile:
-                outfile.write(generated_cpp)
+                outfile.write(generated_code)
 
 if __name__ == "__main__":
     main(sys.argv[1:])

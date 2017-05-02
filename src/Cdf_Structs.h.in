@@ -1,4 +1,451 @@
 {
+ "CDFVariableValuesRecord_t": [
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "size", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "type", 
+   "endianness": "Big", 
+   "word_size": 4
+  }
+ ], 
+ "CDFCompressedRecord_t": [
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "size", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "type", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "CPRoffset", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "uSize", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfuA", 
+   "endianness": "Big", 
+   "word_size": 4
+  }
+ ], 
+ "CDFCompressedParametersRecord_t": [
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "size", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "type", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "cType", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfuA", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "pCount", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "cParms", 
+   "endianness": "Big", 
+   "word_size": 4
+  }
+ ], 
+ "CDFCompressedVariableValuesRecord_t": [
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "size", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "type", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfuA", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "cSize", 
+   "endianness": "Big", 
+   "word_size": 8
+  }
+ ], 
+ "CDFVariableIndexRecord_t": [
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "size", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "type", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "VXRnext", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "Nentries", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "NusedEntries", 
+   "endianness": "Big", 
+   "word_size": 4
+  }
+ ], 
+ "CDFUnusedInternalRecord_t": [
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "size", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "type", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "NextUIR", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "PrevUIR", 
+   "endianness": "Big", 
+   "word_size": 8
+  }
+ ], 
+ "CDFAttributeDecriptorRecord_t": [
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "size", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "type", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "ADRnext", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "AgrEDRhead", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "Scope", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "Num", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "NgrEntries", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "MAXgrEntries", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfua", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "AzEDRhead", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "NzEntries", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "MAXzEntry", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfuE", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": "char", 
+   "array_size": 256, 
+   "name": "Name", 
+   "endianness": null, 
+   "word_size": null
+  }
+ ], 
+ "CDFMagic_t": [
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "Magic1", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "Magic2", 
+   "endianness": "Big", 
+   "word_size": 4
+  }
+ ], 
+ "CDFVariableDecriptorRecord_t": [
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "size", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "type", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "VDRnext", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "DataType", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "MaxRec", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "VXRhead", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "VXRtail", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "Flags", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "SRecords", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfuB", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfuC", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfuF", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "NumElements", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "Num", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "CPRorSPRoffset", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "BlockingFactor", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": "char", 
+   "array_size": 256, 
+   "name": "Name", 
+   "endianness": null, 
+   "word_size": null
+  }
+ ], 
+ "CDFUnasociableUnusedInternalRecord_t": [
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "size", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "type", 
+   "endianness": "Big", 
+   "word_size": 4
+  }
+ ], 
  "CDFDescriptorRecord_t": [
   {
    "overhide_type": null, 
@@ -92,7 +539,7 @@
    "word_size": null
   }
  ], 
- "CDFCompressedParametersRecord_t": [
+ "CDFGlobalDescriptorRecord_t": [
   {
    "overhide_type": null, 
    "array_size": null, 
@@ -110,7 +557,114 @@
   {
    "overhide_type": null, 
    "array_size": null, 
-   "name": "cType", 
+   "name": "rVDRhead", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "zVDRhead", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "ADRhead", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "eof", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "NrVars", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "NumAttr", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rMaxRec", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rNumDims", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "NzVars", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "UIRhead", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfuC", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "LeapSecondLastUpdated", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfuE", 
+   "endianness": "Big", 
+   "word_size": 4
+  }
+ ], 
+ "CDFSparsnessParametersRecord_t": [
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "size", 
+   "endianness": "Big", 
+   "word_size": 8
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "type", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "sArraysType", 
    "endianness": "Big", 
    "word_size": 4
   }, 
@@ -119,7 +673,7 @@
    "array_size": null, 
    "name": "rfuA", 
    "endianness": "Big", 
-   "word_size": 8
+   "word_size": 4
   }, 
   {
    "overhide_type": null, 
@@ -127,32 +681,9 @@
    "name": "pCount", 
    "endianness": "Big", 
    "word_size": 4
-  }, 
-  {
-   "overhide_type": null, 
-   "array_size": null, 
-   "name": "cParms", 
-   "endianness": "Big", 
-   "word_size": 4
   }
  ], 
- "CDFMagic_t": [
-  {
-   "overhide_type": null, 
-   "array_size": null, 
-   "name": "Magic1", 
-   "endianness": "Big", 
-   "word_size": 4
-  }, 
-  {
-   "overhide_type": null, 
-   "array_size": null, 
-   "name": "Magic2", 
-   "endianness": "Big", 
-   "word_size": 4
-  }
- ], 
- "CDFCompressedRecord_t": [
+ "CDFAttributeEntryDecriptorRecord_t": [
   {
    "overhide_type": null, 
    "array_size": null, 
@@ -170,21 +701,70 @@
   {
    "overhide_type": null, 
    "array_size": null, 
-   "name": "CPRoffset", 
+   "name": "AEDRnext", 
    "endianness": "Big", 
    "word_size": 8
   }, 
   {
    "overhide_type": null, 
    "array_size": null, 
-   "name": "uSize", 
+   "name": "AttrNum", 
    "endianness": "Big", 
-   "word_size": 8
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "DataType", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "Num", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "NumElements", 
+   "endianness": "Big", 
+   "word_size": 4
   }, 
   {
    "overhide_type": null, 
    "array_size": null, 
    "name": "rfuA", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfuB", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfuC", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfuD", 
+   "endianness": "Big", 
+   "word_size": 4
+  }, 
+  {
+   "overhide_type": null, 
+   "array_size": null, 
+   "name": "rfuE", 
    "endianness": "Big", 
    "word_size": 4
   }

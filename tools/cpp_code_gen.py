@@ -103,7 +103,13 @@ decltype (auto) mapCDFBlock(std::shared_ptr<char> data,int offset=0){};
             if member.endianness == "Little":
                 BE_FIX += self.swap_endianness(member);
         return """
-using {typename} = safeStructMapper<_{typename}>;
+class {typename}: public safeStructMapper<_{typename}>
+{{
+  public:
+    {typename}(std::shared_ptr<char> data, _{typename}* structToMap)
+      :safeStructMapper<_{typename}>(data,structToMap)
+    {{}}
+}};
 template<>
 inline decltype (auto) mapCDFBlock<{typename}>(std::shared_ptr<char> data,int offset)
 {{

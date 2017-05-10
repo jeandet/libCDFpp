@@ -13,7 +13,13 @@ set(SOURCES
     )
     
 
+
+
+
 add_executable(test_CDR ${SOURCES})
+if(coverage)
+    target_link_libraries(test_CDR gcov)
+endif()
 target_link_libraries(test_CDR gtest gtest_main)
 target_link_libraries(test_CDR gmock gmock_main)
 target_link_libraries(test_CDR libCDF++)

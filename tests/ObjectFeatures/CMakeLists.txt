@@ -14,6 +14,9 @@ set(SOURCES
 
 
 add_executable(test_ObjectFeatures ${SOURCES})
+if(coverage)
+    target_link_libraries(test_ObjectFeatures gcov)
+endif()
 target_link_libraries(test_ObjectFeatures gtest gtest_main)
 target_link_libraries(test_ObjectFeatures gmock gmock_main)
 target_link_libraries(test_ObjectFeatures libCDF++)

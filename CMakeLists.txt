@@ -14,6 +14,18 @@ else()
      set (CMAKE_CXX_STANDARD 14)
 endif()
 
+if(coverage)
+    set(CMAKE_CXX_FLAGS "-g -O0 -Wall -fprofile-arcs -ftest-coverage")
+    set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
+    add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/out/index.html
+      COMMAND lcov --capture --directory ${CMAKE_CURRENT_BINARY_DIR} --output-file ${CMAKE_CURRENT_BINARY_DIR}/coverage.info
+      COMMAND genhtml ${CMAKE_CURRENT_BINARY_DIR}/coverage.info  --output-directory ${CMAKE_CURRENT_BINARY_DIR}/out
+      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+      COMMENT "Generating coverage repports"
+    )
+    add_custom_target(coverage_report DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/out/index.html    )
+endif()
+
 add_custom_command(
     COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/tools/code_gen.py ${CMAKE_CURRENT_LIST_DIR}/src/Cdf_Structs.h.in ${CMAKE_CURRENT_BINARY_DIR}/Cdf_Structs.h
     DEPENDS ${CMAKE_CURRENT_LIST_DIR}/tools/code_gen.py ${CMAKE_CURRENT_LIST_DIR}/src/Cdf_Structs.h.in
@@ -37,6 +49,7 @@ include_directories(
     )
 
 option(test "Build all tests." ON) # Makes boolean 'test' available.
+option(coverage "Enables code coverage." OFF)
 
 if (test)
 

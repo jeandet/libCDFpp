@@ -14,6 +14,9 @@ set(SOURCES
 
 
 add_executable(test_SimpleOpen ${SOURCES})
+if(coverage)
+    target_link_libraries(test_SimpleOpen gcov)
+endif()
 target_link_libraries(test_SimpleOpen gtest gtest_main)
 target_link_libraries(test_SimpleOpen gmock gmock_main)
 target_link_libraries(test_SimpleOpen libCDF++)

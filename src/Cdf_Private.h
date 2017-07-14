@@ -28,7 +28,7 @@
 #include <string>
 #include <memory>
 #include <fstream>
-#include <libCDF++.h>
+#include <libCDF.h>
 
 class Cdf_Private
 {

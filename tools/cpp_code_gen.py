@@ -23,6 +23,10 @@ class code_gen(object):
  #define __bswap_32 OSSwapInt32
  #define __bswap_64 OSSwapInt64
  #include <machine/endian.h>
+#elif defined(__MINGW32__)
+   #define __bswap_16 __builtin_bswap16
+   #define __bswap_32 __builtin_bswap32
+   #define __bswap_64 __builtin_bswap64
 #else
  #include <byteswap.h>
  #include <endian.h>

@@ -23,7 +23,7 @@
 #include <iostream>
 #include <fstream>
 #include <limits>
-#include <libCDF++.h>
+#include <libCDF.h>
 #include <Cdf_Structs.h>
 
 bool p_checkMagic(const CDFMagic_t& magic);

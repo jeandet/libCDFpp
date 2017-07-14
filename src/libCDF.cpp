@@ -19,7 +19,7 @@
 /*--                 Author : Alexis Jeandet
 --                     Mail : alexis.jeandet@member.fsf.org
 ----------------------------------------------------------------------------*/
-#include <libCDF++.h>
+#include <libCDF.h>
 #include "Cdf_Private.h"
 
 

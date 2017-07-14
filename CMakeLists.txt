@@ -34,8 +34,8 @@ add_custom_command(
 )
 
 set(SOURCES
-    src/libCDF++.cpp
-    include/libCDF++.h
+    src/libCDF.cpp
+    include/libCDF.h
     src/Cdf_Private.cpp
     src/Cdf_Private.h
     ${CMAKE_CURRENT_BINARY_DIR}/Cdf_Structs.h

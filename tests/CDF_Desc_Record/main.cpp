@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "libCDF++.h"
+#include "libCDF.h"
 #include <vector>
 
 struct testInput

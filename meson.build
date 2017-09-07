@@ -10,12 +10,17 @@ gen_src = custom_target('gen-cdf-structs',
 
 inc = include_directories('include')
 
-libCDFpp=shared_library('libCDF++', 'src/Cdf_Private.cpp', 'src/libCDF.cpp',
+libCDFpp_lib=library('libCDF++', 'src/Cdf_Private.cpp', 'src/libCDF.cpp',
 	gen_src,
 	include_directories : inc,
-	default_options : ['cpp_std=c++14'],
+	cpp_args : ['-std=c++14'],
 	version : '1.0.0',
 	soversion : '0')
+
+libCDFpp = declare_dependency(link_with : libCDFpp_lib,
+                                include_directories : inc,
+                                compile_args : '-std=c++14')
+
 
 gtest_dep = dependency('gtest', required : false, main : false, fallback:['gtest','gtest_mainless_dep'])
 
@@ -26,10 +31,8 @@ test_list = ['SimpleOpen','ObjectFeatures','CDF_Desc_Record']
 foreach tst : test_list
 	exe = executable('@0@Test'.format(tst),
 	 	'tests/@0@/main.cpp'.format(tst),
-	 	include_directories : inc,
-	 	dependencies : gtest_dep,
-	 	cpp_args : data_dir,
-	 	link_with : libCDFpp)
+	 	dependencies : [gtest_dep, libCDFpp],
+	 	cpp_args : data_dir)
 
 	test('@0@ test'.format(tst), exe)
 endforeach
